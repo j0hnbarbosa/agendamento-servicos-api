@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - example-db:/var/lib/postgresql/data
+  api:
+      image: agendamento-servicos-api
+      restart: always
+      build:
+        context: .
+      environment:
+        PROD_DB_NAME: postgres
+        PROD_DB_USERNAME: postgres
+        PROD_DB_PASSWORD: postgres
+        PROD_DB_HOSTNAME: postgres
+        NODE_ENV: production
+        URL_WEB: http://localhost:3000
+        URL_API: http://localhost:3001
+      depends_on:
+        - postgres
+      ports:
+        - "3001:3001"
+volumes:
+  example-db:
