@@ -10,8 +10,6 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerFile = require('./swagger-output.json');
 const bodyParser = require('body-parser');
 
-const childProcess = require('child_process')
-
 const cors = require('cors')
 
 const indexRouter = require('./routes/index');
@@ -33,10 +31,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-// app.get('*', (req, res) => {
-//   // REDIRECT goes here
-// })
 
 app.use('/', indexRouter, (req, res) => {
   res.redirect('/docs')

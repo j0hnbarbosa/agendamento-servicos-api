@@ -3,7 +3,7 @@
 
 Essa aplicação trabalha juntamente com a versão do frontend [here](https://github.com/samuk-a/agendamento-servicos)
 
-# Execute os comandos:
+# Execute os comandos no terminal:
 ```bash
   
   ## Esse comando conta com um PONTO no final que indica o local de onde será pego os arquivos
@@ -12,10 +12,8 @@ Essa aplicação trabalha juntamente com a versão do frontend [here](https://gi
   ## Para iniciar a execução da aplicação digite:
   docker-compose up -d
 
-
   ## Para parar a execução digite:
   docker-compose down
-
 
   ## Para parar a execução da aplicação e excluir os dados salvos na base de dados digite:
   docker-compose down -v
