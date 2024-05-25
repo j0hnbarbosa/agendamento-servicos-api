@@ -1,7 +1,7 @@
 
 # Baixe o Docker na sua máquina [here](https://www.docker.com/products/docker-desktop/)
 
-Essa aplicação trabalha juntamente com a versão do frontend [here](https://github.com/samuk-a/agendamento-servicos)
+Essa aplicação trabalha juntamente com a versão do frontend [AQUI](https://github.com/j0hnbarbosa/agendamento-servicos-web)
 
 # Execute os comandos no terminal:
 ```bash
