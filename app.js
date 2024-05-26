@@ -17,7 +17,8 @@ const indexRouter = require('./routes/index');
 const app = express();
 
 var corsOptions = {
-  origin: [process.env.URL_API, process.env.URL_WEB],
+  // origin: [process.env.URL_API, process.env.URL_WEB],
+  origin: '*',
 }
 
 /* Middlewares */
