@@ -45,7 +45,7 @@ const WorkTypeController = {
       const workType = await db.WorkType.findByPk(id);
 
       if (!workType) {
-        return res.status(404).json({ message: "Work Type not found" });
+        return res.status(404).json({ message: `Work Type not found ID: ${id}` });
       }
 
       await workType.destroy();

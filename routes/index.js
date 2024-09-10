@@ -8,6 +8,8 @@ const router = new Router();
 
 router.get("/api/v1/users", UserController.getUsers);
 router.post("/api/v1/createUser", UserController.createUser);
+router.delete("/api/v1/deleteUser/:id", UserController.deleteUser);
+router.put("/api/v1/updateUser/:id", UserController.updateUser);
 
 router.post("/api/v1/login", LoginController.validate);
 

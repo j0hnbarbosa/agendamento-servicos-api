@@ -75,37 +75,59 @@ const UserController = {
     }
   },
 
-  updateUser: (req, res) => {
+  updateUser: async (req, res) => {
     /**
      * #swagger.tags = ['User']
      * #swagger.description = 'Endpoint to update a user'
      */
-    const { name, email } = req.body;
+    const { name, email, isProvider } = req.body;
 
-    const user = users.find((user) => user.id === parseInt(req.params.userId));
+    try {
+      const user = await db.User.findByPk(req.params.id);
 
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      const dataUpdated = {};
+
+      if (name) {
+        dataUpdated.name = name;
+      }
+
+      if (email) {
+        dataUpdated.email = email;
+      }
+
+      if (isProvider !== undefined) {
+        dataUpdated.isProvider = isProvider;
+      }
+
+      await user.update(dataUpdated);
+
+      return res.json(user);
+    } catch (error) {
+      return res.json({ error: error.message });
     }
 
-    user.name = name;
-    user.email = email;
-
-    res.json({
-      user: user,
-    });
   },
 
-  deleteUser: (req, res) => {
+  deleteUser: async (req, res) => {
     /**
      * #swagger.tags = ['User']
      * #swagger.description = 'Endpoint to delete a user'
      */
 
     try {
-      users = users.filter((user) => user.id !== parseInt(req.params.userId));
+      const user = await db.User.findByPk(req.params.id);
 
-      return res.json();
+      if (!user) {
+        return res.status(404).json({ message: `User not found ID: ${req.params.id}` });
+      }
+
+      await user.destroy();
+
+      return res.json({ message: `User ID: ${req.params.id} deleted` });
     } catch (error) {
       return res.json({ error: error.message });
     }

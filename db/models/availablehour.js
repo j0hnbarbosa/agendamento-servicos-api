@@ -11,10 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      AvailableHour.belongsTo(models.User, { as: "users", foreignKey: "UserId" });
+      AvailableHour.belongsTo(models.User, { as: "users", foreignKey: "UserId", onDelete: 'CASCADE' });
       models.User.hasMany(AvailableHour);
 
-      AvailableHour.belongsTo(models.WorkType, { as: "workTypes", foreignKey: "WorkTypeId" });
+      AvailableHour.belongsTo(models.WorkType, { as: "workTypes", foreignKey: "WorkTypeId", onDelete: 'CASCADE' });
       models.WorkType.hasMany(AvailableHour);
     }
   }
