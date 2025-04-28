@@ -5,9 +5,9 @@ Essa aplicação trabalha juntamente com a versão do frontend [AQUI](https://gi
 
 # Crie uma arquivo ***.env*** e adicione:
 ```bash
-PORT=3001
-URL_API=http://localhost:3001
-URL_WEB=http://localhost:3000
+PORT=5001
+URL_API=http://localhost:5001
+URL_WEB=http://localhost:5000
 PATH_FRONT_BUILD=your_path_to_build_file
 ```
 
@@ -30,4 +30,4 @@ PATH_FRONT_BUILD=your_path_to_build_file
 ```
 
 
-## Se acessar o endereço http://localhost:3001 irá acessar a documentação da api.
+## Se acessar o endereço http://localhost:5001 irá acessar a documentação da api.
