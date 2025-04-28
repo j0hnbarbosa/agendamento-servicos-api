@@ -26,6 +26,7 @@ app.use(cors(corsOptions))
 
 app.use(bodyParser.json());
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -33,9 +34,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter, (req, res) => {
-  res.redirect('/docs')
-});
+// app.use('/', indexRouter, (req, res) => {
+//   res.redirect('/docs')
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

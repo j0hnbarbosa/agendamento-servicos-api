@@ -19,13 +19,13 @@ PATH_FRONT_BUILD=your_path_to_build_file
   docker build -t agendamento-servicos-api .
 
   ## Para iniciar a execução da aplicação digite:
-  docker-compose up -d
+  docker compose up -d
 
   ## Para parar a execução digite:
-  docker-compose down
+  docker compose down
 
   ## Para parar a execução da aplicação e excluir os dados salvos na base de dados digite:
-  docker-compose down -v
+  docker compose down -v
 
 ```
 
