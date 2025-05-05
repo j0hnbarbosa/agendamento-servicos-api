@@ -25,7 +25,7 @@ var corsOptions = {
 app.use(cors(corsOptions))
 
 app.use(bodyParser.json());
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use('/api-agenda/docs', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 // app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use(logger('dev'));
@@ -35,7 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter, (req, res) => {
-  res.redirect('/docs')
+  res.redirect('/api-agenda/docs')
 });
 
 // catch 404 and forward to error handler
