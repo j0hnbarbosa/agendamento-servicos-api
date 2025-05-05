@@ -11,7 +11,6 @@ URL_WEB=http://localhost:5000
 PATH_FRONT_BUILD=your_path_to_build_file
 ```
 
-
 # Execute os comandos no terminal:
 ```bash
   
@@ -29,5 +28,13 @@ PATH_FRONT_BUILD=your_path_to_build_file
 
 ```
 
+# Para executar e criar a base de dados e as tabelas no ambiente local sem usar o docker
+```bash
+  # Aplicar as migrations na base de dados para criar as tabelas
+  npx sequelize-cli db:migrate
+
+  # Executar aplicação
+  npm run start
+```
 
 ## Se acessar o endereço http://localhost:5001 irá acessar a documentação da api.

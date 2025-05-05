@@ -8,4 +8,5 @@ COPY . .
 RUN chown -R app /opt/app
 USER app
 EXPOSE 5001
+RUN npx sequelize-cli db:migrate
 CMD [ "npm", "start" ]
