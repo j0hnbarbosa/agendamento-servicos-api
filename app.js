@@ -34,9 +34,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter, (req, res) => {
-  res.redirect('/api-agenda/docs')
-});
+app.use('/api-agenda', indexRouter);
+
+// app.use('/', indexRouter, (req, res) => {
+//   res.redirect('/api-agenda/docs')
+// });
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
