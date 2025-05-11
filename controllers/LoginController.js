@@ -1,4 +1,4 @@
-const { PasswordController } = require('./PasswordController');
+const { PasswordService } = require('../services/PasswordService');
 const jwt = require("jsonwebtoken");
 
 const LoginController = {
@@ -11,7 +11,7 @@ const LoginController = {
     try {
       const email = req.body.email.trim();
       const password = req.body.password.trim();
-      const isValid = await PasswordController.validate(email, password);
+      const isValid = await PasswordService.validate(email, password);
 
       if (isValid) {
         const token = jwt.sign({ email }, "Something_Secret_Here", {

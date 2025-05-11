@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const db = require("../db/models/index");
 
-const PasswordController = {
+const PasswordService = {
   create: async (email, password) => {
     /**
      * #swagger.tags = ['Password']
@@ -16,7 +16,28 @@ const PasswordController = {
 
       await db.Password.create({ email, salt, passwordHash });
     } catch (error) {
-      return res.json({ error: error.message });
+      return ({ error: error.message });
+    }
+  },
+
+  update: async (email, password) => {
+    /**
+     * #swagger.tags = ['Password']
+     * #swagger.description = 'Endpoint to create a new password'
+     */
+
+    try {
+      const pass_email = password.trim() + email.trim();
+
+      const salt = await bcrypt.genSalt();
+      const passwordHash = await bcrypt.hash(pass_email, salt);
+
+      await db.Password.update({ salt, passwordHash }, {
+        where: { email },
+      });
+    } catch (error) {
+      console.log('PasswordService update error', error)
+      return ({ error: error.message });
     }
   },
 
@@ -46,4 +67,4 @@ const PasswordController = {
 
 };
 
-module.exports = { PasswordController };
+module.exports = { PasswordService };

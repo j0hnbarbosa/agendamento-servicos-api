@@ -1,6 +1,6 @@
 const db = require("../db/models/index");
 
-const { PasswordController } = require('./PasswordController')
+const { PasswordService } = require('../services/PasswordService')
 
 const UserController = {
   getUsers: async (req, res) => {
@@ -44,7 +44,7 @@ const UserController = {
       const newUser = await db.User.create({ name, email, isProvider })
 
       if (newUser?.id) {
-        await PasswordController.create(email, password)
+        await PasswordService.create(email, password)
       }
 
       return res.json(newUser);
@@ -80,7 +80,7 @@ const UserController = {
      * #swagger.tags = ['User']
      * #swagger.description = 'Endpoint to update a user'
      */
-    const { name, email, isProvider } = req.body;
+    const { name, email, isProvider, password } = req.body;
 
     try {
       const user = await db.User.findByPk(req.params.id);
@@ -103,10 +103,15 @@ const UserController = {
         dataUpdated.isProvider = isProvider;
       }
 
+      if (password?.trim() && user?.id) {
+        await PasswordService.update(email, password)
+      }
+
       await user.update(dataUpdated);
 
       return res.json(user);
     } catch (error) {
+      console.log('UserController updateUser error', error)
       return res.json({ error: error.message });
     }
 
