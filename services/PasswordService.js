@@ -53,15 +53,14 @@ const PasswordService = {
       const passwordData = await db.Password.findOne({ where: { email } });
 
       if (!passwordData) {
-        return res.status(404).json({ message: "User not found" });
+        return { isValid: false, error: { message: "User not found" } };
       }
 
       const isValid = await bcrypt.compare(pass_email, passwordData.passwordHash);
 
-      return isValid;
+      return { isValid };
     } catch (error) {
-
-      return false
+      return { isValid: false, error };
     }
   },
 

@@ -11,18 +11,19 @@ const LoginController = {
     try {
       const email = req.body.email.trim();
       const password = req.body.password.trim();
-      const isValid = await PasswordService.validate(email, password);
+      const dataIsValid = await PasswordService.validate(email, password);
 
-      if (isValid) {
+      if (dataIsValid.isValid && !dataIsValid?.error) {
         const token = jwt.sign({ email }, "Something_Secret_Here", {
           expiresIn: "8h",
         });
 
         return res.json({ token });
       } else {
-        return res.json({ message: "Login failed" });
+        return res.status(401).json({ message: dataIsValid?.error?.message || "Login failed" });
       }
     } catch (error) {
+      console.log('LoginController validate error:', error);
       return res.json({ error: error.message });
     }
   },
