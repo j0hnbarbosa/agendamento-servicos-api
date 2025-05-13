@@ -11,11 +11,16 @@ const PasswordService = {
     try {
       const pass_email = password.trim() + email.trim();
 
+      const user = await db.User.findOne({
+        where: { email }
+      });
+
       const salt = await bcrypt.genSalt();
       const passwordHash = await bcrypt.hash(pass_email, salt);
 
-      await db.Password.create({ email, salt, passwordHash });
+      await db.Password.create({ email, salt, passwordHash, UserId: user.id });
     } catch (error) {
+      console.log('PasswordService create error', { error: error.message })
       return ({ error: error.message });
     }
   },
@@ -60,6 +65,7 @@ const PasswordService = {
 
       return { isValid };
     } catch (error) {
+      console.log('PasswordService validate error', { error: error.message })
       return { isValid: false, error };
     }
   },

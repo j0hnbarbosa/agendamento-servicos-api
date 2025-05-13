@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Password.belongsTo(models.User, { as: "users", foreignKey: "UserId", onDelete: 'CASCADE' });
+      models.User.hasOne(Password);
     }
   }
   Password.init({
@@ -20,7 +22,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     salt: DataTypes.STRING,
-    passwordHash: DataTypes.STRING
+    passwordHash: DataTypes.STRING,
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   }, {
     sequelize,
     modelName: 'Password',
