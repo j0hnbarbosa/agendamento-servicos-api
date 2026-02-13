@@ -6,7 +6,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     ports:
-      - "127.0.0.1:5432:5432"
+      - "127.0.0.1:5432:5432" # Not allow Database be accessed from outside the host machine
     volumes:
       - example-db:/var/lib/postgresql/data
   api:
